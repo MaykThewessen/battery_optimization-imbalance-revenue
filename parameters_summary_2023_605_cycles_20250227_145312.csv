@@ -1,0 +1,24 @@
+Year_price_data,2023
+Elec_price,NL
+Dispatch_strategy,"max_profit GPLK optimization, 98 percent perfect solution, real world can be 10-20% lower profit"
+Battery_capacity_kWh,400
+Battery_power_kW,200
+Battery_CAPEX_investment,120000
+annual_revenue,75274
+annual_charge_cost,-11698
+annual_profit,86973
+payback_time,0.7
+annual_charge,242327
+annual_discharge,205751
+annual_charge_losses,36575
+cycle_depreciation_cost_Euro_per_MWh,50
+cycles_made_per_year,605
+annual_depreciation_cost,12116
+avg_charge_price_Euro_per_MWh,-48.2764072109088
+avg_discharge_price_Euro_per_MWh,365.85327864075833
+avg_charge_losses_percent,0.15093629976800202
+avg_spread_price_Euro_per_MWh,414.12968585166715
+avg_profit_price_Euro_per_MWh,358.9091457156393
+cycle_depreciation_cost_for_1MWh,30290
+annual_profit_per_1MWh_battery_capacity,217433
+total_profit_per_1MW_battery_power,434867

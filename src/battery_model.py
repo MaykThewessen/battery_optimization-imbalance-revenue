@@ -76,13 +76,14 @@ def optimize_year(df, first_model_hour, last_model_hour):
 
     # Define model parameters
     #model.T = Set(doc='hour of year', initialize=df.hour.tolist(), ordered=True)
-    model.T = Set(doc='15-minute intervals of the year', initialize=range(first_model_hour, last_model_hour + 1), ordered=True)
-    model.Rmax = Param(initialize=200* 15/60,
+    model.T     = Set(doc='15-minute intervals of the year', initialize=range(first_model_hour, last_model_hour + 1), ordered=True)
+    model.Rmax  = Param(initialize=200* 15/60,
                        doc='Max rate of power flow (kW) in or out') # set max charge/discharge power to 100kW and divide by 15/60 to get 15 minute max energy charge or discharge
-    model.Smax = Param(initialize=400, doc='Max storage (kWh)')
-    model.Dmax = Param(initialize= 2.0 * model.Smax * 48/24, doc='Max discharge in 48 hours') # now set to 2 cycles per day avg, hard limit on 4 cycles per 2 days
-    model.P = Param(initialize=df.lbmp.tolist(), doc='LBMP for each hour')
-    eta = 0.85 # Round trip storage efficiency
+    model.Smax  = Param(initialize=400, doc='Max storage (kWh)')
+    days = 4
+    model.Dmax  = Param(initialize=(600*days), doc='Max discharge in 4-days of time blocks') # set max discharge to 400kWh in 4 days
+    model.P     = Param(initialize=df.lbmp.tolist(), doc='LBMP for each hour')
+    eta         = 0.85 # Round trip storage efficiency
 
     # Charge, discharge, and state of charge
     # Could use bounds for the first 2 instead of constraints
@@ -129,10 +130,10 @@ def optimize_year(df, first_model_hour, last_model_hour):
 
         # Check all t until the last 48 hours
         # No need to check with < 48 hours remaining because the constraint is
-        # changed to limit to 48*4 = 196 time steps of 15min adds up to 24 hours
+        # changed to limit to 48*4 = 192 time steps of 15min adds up to 24 hours
         # already in place for a larger number of hours
-        if t < max_t - 196:
-            return sum(model.Eout[i] for i in range(t, t+196)) <= model.Dmax
+        if t < max_t - (days*24*4):
+            return sum(model.Eout[i] for i in range(t, t+(days*24*4))) <= model.Dmax
         else:
             return Constraint.Skip
 

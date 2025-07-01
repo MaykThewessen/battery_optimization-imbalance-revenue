@@ -1,0 +1,27 @@
+saved results for Battery dispatch in 2023 
+using 
+Battery capacity: 200kWh with 100kW battery power 
+
+Runned script: 	Dispatch optimization_2023.ipynb
+Results for: 	full_optimization_results 2023.csv
+
+
+Annual profit was €461,430 per MW
+Annual profit was €230,715 per MWh
+cycle_depreciation_cost: 29 €/MWh
+Cycles per year: 780
+cycle_depreciation_cost for cycling 1 MWh per year: €22,738
+
+
+Annual profit was €46,143 (battery size being 200kWh with 100kW max charge)
+Annual discharge income was €41,367
+Annual charging cost was €-4,776
+depreciation_cost: €4,548
+Annual discharged throughput was 132,414 kWh
+
+
+Annual average charged price was -31 €/MWh
+Annual average discharged price was 312 €/MWh
+Annual average charge losses was 15%
+Annual average spread price was 343 €/MWh
+Annual average profit price was 296 €/MWh
